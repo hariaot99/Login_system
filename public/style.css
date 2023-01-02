@@ -1,0 +1,46 @@
+body {
+    background-color: #3D8361;
+    align-items: center;
+}
+nav {
+    background-color: #1C6758;
+    color: #EEF2E6;
+    padding: 15px 60px;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+nav li {
+    list-style: none;
+}
+
+nav li a {
+    color: #EEF2E6;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 8px;
+}
+
+nav li a:hover {
+    color: #D6CDA4;
+    text-decoration: none;
+}
+
+.card {
+    background-color: #D6CDA4;
+}
+
+.btn {
+    background-color: #3D8361;
+}
+
+.btn:hover {
+    background-color: #1C6758;
+}
+
