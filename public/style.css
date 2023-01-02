@@ -1,10 +1,11 @@
 body {
     background-color: #3D8361;
+    align-items: center;
 }
 nav {
     background-color: #1C6758;
     color: #EEF2E6;
-    padding: 30px 60px;
+    padding: 15px 60px;
     display: flex;
     justify-content: space-between;
 }
