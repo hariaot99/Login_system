@@ -11,7 +11,7 @@ app.use(express.static(publicDirectory));
 app.use(express.urlencoded({ extended: false}));
 
 //garantir que os dados do forms chegam em json
-app.use(express.json);
+app.use(express.json());
 
 //definindo local das rotas
 app.use('/', require('./routes/pages'));
@@ -20,6 +20,6 @@ app.use('/auth', require('./routes/auth'));
 
 app.set('view engine', 'hbs');
 
-app.listen(8081, () => {
+app.listen(8083, () => {
     console.log(">>>>> Servidor Iniciado com Sucesso! ");
 })

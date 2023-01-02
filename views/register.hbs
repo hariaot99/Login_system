@@ -24,41 +24,43 @@
       </ul>
     </nav>
 
-    <div class="container mt-4">
+    <div class="d-flex justify-content-center container mt-4">
 
-      <div class="card">
+      <div class="card w-50">
         <div class="card-header">
           Formulário de Registro
         </div>
-        <div class="card-body">
+        <div class="card-body justify-content-center">
 
           <form action="/auth/register" method="POST">
-            <div class="mb-3">
+            <div class="p-1 ">
               <label for="name" class="form-label">Nome: </label>
               <input type="text" class="form-control" id="name" name="name"/>
             </div>
 
-            <div class="mb-3">
+            <div class="p-1 ">
               <label for="cpf" class="form-label">CPF: </label>
               <input type="text" class="form-control" id="cpf" name="cpf"/>
             </div>
+        
 
-            <div class="mb-3">
+
+            <div class="p1">
               <label for="telephone" class="form-label">Telefone: </label>
               <input type="telephone" class="form-control" id="telephone" name="telephone"/>
             </div>
 
-            <div class="mb-3">
+            <div class="p1">
               <label for="email" class="form-label">Email: </label>
               <input type="email" class="form-control" id="email" name="email"/>
             </div>
 
-            <div class="mb-3">
+            <div class="p1">
               <label for="password" class="form-label">Senha: </label>
               <input type="password" class="form-control" id="password" name="password"/>
             </div>
 
-            <div class="mb-3">
+            <div class="p1 mb-2">
               <label for="passwordConfirm" class="form-label">Comfirme a Senha: </label>
               <input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm"/>
             </div>
@@ -67,11 +69,10 @@
           </form>
 
         </div>
+      </div>
         {{#if message}}
         <h4 class="alert alert-danger mt-4">{{message}}</h4>
         {{/if}}
-      </div>
-
     </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

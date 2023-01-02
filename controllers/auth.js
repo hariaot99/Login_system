@@ -1,6 +1,7 @@
 const db_conection = require("../database");
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const { restart } = require("nodemon");
 
 exports.register = (req, res) => {
     console.log(req.body);
@@ -18,12 +19,29 @@ exports.register = (req, res) => {
        }
        else if(password !== passwordConfirm){
         return res.render('register', { 
-            message: ' As senhas não são iguais'
+            message: ' ERRO: As senhas são diferentes'
         });
        }
 
        let hashedPassword = await bcrypt.hash(password, 8);
        console.log(hashedPassword);
 
+       db_conection.query('INSERT INTO user SET ?', {
+        name: name,
+        cpf: cpf,
+        telephone: telephone,
+        email: email,
+        password: hashedPassword
+       }, (error, results) => {
+        if(error) {
+            console.log(error);
+        }
+        else {
+            console.log(results);
+            return res.render('register', {
+                message: "Usuario registrado"
+            })
+        }
+       })
     });
 }
