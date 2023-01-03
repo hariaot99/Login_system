@@ -20,6 +20,6 @@ app.use('/auth', require('./routes/auth'));
 
 app.set('view engine', 'hbs');
 
-app.listen(8083, () => {
+app.listen(8085, () => {
     console.log(">>>>> Servidor Iniciado com Sucesso! ");
 })

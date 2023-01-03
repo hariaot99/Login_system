@@ -22,6 +22,16 @@ exports.register = (req, res) => {
             message: ' ERRO: As senhas são diferentes'
         });
        }
+       db_conection.query('SELECT cpf FROM user WHERE cpf = ?', [cpf, async(error, results) => {
+        if(error){
+            console.log(error);
+        }
+        if(results.length > 0) {
+            return res.render('register', {
+                message: 'Cpf já está cadastrado'
+            })
+        }
+       }])
 
        let hashedPassword = await bcrypt.hash(password, 8);
        console.log(hashedPassword);
