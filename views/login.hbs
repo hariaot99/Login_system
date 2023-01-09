@@ -28,28 +28,10 @@
 
       <div class="card w-50">
         <div class="card-header">
-          Formulário de Registro
+          Login Form
         </div>
         <div class="card-body justify-content-center">
-
-          <form action="/auth/register" method="POST">
-            <div class="p-1 ">
-              <label for="name" class="form-label">Nome: </label>
-              <input type="text" class="form-control" id="name" name="name"/>
-            </div>
-
-            <div class="p-1 ">
-              <label for="cpf" class="form-label">CPF: </label>
-              <input type="text" class="form-control" id="cpf" name="cpf"/>
-            </div>
-        
-
-
-            <div class="p1">
-              <label for="telephone" class="form-label">Telefone: </label>
-              <input type="telephone" class="form-control" id="telephone" name="telephone"/>
-            </div>
-
+          <form action="/auth/login" method="POST">
             <div class="p1">
               <label for="email" class="form-label">Email: </label>
               <input type="email" class="form-control" id="email" name="email"/>
@@ -60,14 +42,10 @@
               <input type="password" class="form-control" id="password" name="password"/>
             </div>
 
-            <div class="p1 mb-2">
-              <label for="passwordConfirm" class="form-label">Comfirme a Senha: </label>
-              <input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm"/>
-            </div>
-
-            <button type="submit" class="btn btn-primary mt-1">Registrar</button>
-          </form>
-
+            <button type="submit" class="btn btn-primary mt-3"> Logar </button>
+            <button type="button" class="btn btn-primary mt-3"> Registrar</button>
+          </form>   
+  
         </div>
       </div>
         {{#if message}}

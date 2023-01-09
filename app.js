@@ -1,5 +1,5 @@
 const express = require("express");
-const db_conection = require('./database/index');
+const cookieParser = require('cookie-parser');
 const app = express();
 const path = require('path');
 const publicDirectory  = path.join(__dirname, './public');
@@ -12,7 +12,8 @@ app.use(express.urlencoded({ extended: false}));
 
 //garantir que os dados do forms chegam em json
 app.use(express.json());
-
+// Inicializando os cookies instalados
+app.use(cookieParser());
 //definindo local das rotas
 app.use('/', require('./routes/pages'));
 app.use('/auth', require('./routes/auth'));
@@ -21,5 +22,5 @@ app.use('/auth', require('./routes/auth'));
 app.set('view engine', 'hbs');
 
 app.listen(8085, () => {
-    console.log(">>>>> Servidor Iniciado com Sucesso! ");
+    console.log(">>>>> Servidor Iniciado com Sucesso! Porta: 8085 ");
 })
