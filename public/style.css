@@ -44,3 +44,11 @@ nav li a:hover {
     background-color: #1C6758;
 }
 
+.avatar-ctn {
+    background-color: #1C6758;
+    text-align: center;
+}
+.avatar {
+    width: 65%;
+    border-bottom: 1px solid rgba(0,0,00.125);
+}
