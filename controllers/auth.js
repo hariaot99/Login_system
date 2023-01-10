@@ -91,52 +91,67 @@ exports.login = async (req, res) => {
         message: "Insira um email e senha",
       });
     }
+    db_conection.query(
+      "SELECT * FROM user WHERE email = ?",
+      [email],
+      async (error, results) => {
+        if (
+          !results ||
+          !(await bcrypt.compare(password, results[0].password))
+        ) {
+          return res.status(401).render("login", {
+            message: "Email ou Senha incorretos",
+          });
+        } else {
+          const iduser = results[0].iduser;
+          console.log(iduser);
+          const token = jwt.sign({ iduser }, process.env.JWT_SECRET, {
+            expiresIn: process.env.JWT_EXPIRES_IN,
+          });   
+          const cookieOpitions = {
+            expires: new Date(
+              Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
+            ),
+            httpOnly: true,
+          };
+          res.cookie("jwt", token, cookieOpitions);
+          res.status(200).redirect("/");
+        }
+      }
+    );
   } catch (error) {
     console.log(error);
   }
-
-  db_conection.query(
-    "SELECT * FROM user WHERE email = ?",
-    [email],
-    async (error, results) => {
-      console.log(results);
-      if (!results || !(await bcrypt.compare(password, results[0].password))) {
-        return res.status(401).render("login", {
-          message: "Email ou Senha incorretos",
-        });
-      } else {
-        const id = results[0].id;
-        const token = jwt.sign({ id }, process.env.JWT_SECRET, {
-          expiresIn: process.env.JWT_EXPIRES_IN,
-        });
-        console.log("The token is: " + token);
-        const cookieOpitions = {
-          expires: new Date(
-            Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
-          ),
-          httpOnly: true,
-        };
-        res.cookie("jwt", token, cookieOpitions);
-        res.status(200).redirect("/");
-      }
-    }
-  );
 };
 
 exports.isLoggedIn = async (req, res, next) => {
   if (req.cookies.jwt) {
     try {
-      const decoded = await promisify(jwt.verify)(req.cookies.jwt,
+      const decoded = await promisify(jwt.verify)(
+        req.cookies.jwt,
         process.env.JWT_SECRET
       );
-      console.log(decoded);
 
-      db_conection.query('SELECT * FROM user WHERE id = ?', [decode.id], (error, result)=>{
-        console.log(result);
-      })
+      db_conection.query(
+        "SELECT * FROM user WHERE iduser = ?",
+        [decoded.iduser],
+        (error, result) => {
+         console.log(result);
+          if (!result) {
+            return next();
+          } else {  
+            req.user = result[0];
+            console.log("Usuario: ");
+            console.log(req.user);
+            return next();
+          }
+        }
+      );
     } catch (error) {
-        console.log(error);
+      console.log(error);
+      return next();
     }
+  } else {
+    next();
   }
-  next();
 };
